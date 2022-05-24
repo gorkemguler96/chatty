@@ -1,33 +1,22 @@
-import React, {useEffect} from 'react';
-import {View,Text,StyleSheet} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {View,Text,StyleSheet,Button} from "react-native";
 import ContactRow from '../components/ContactRow'
 import Separtor from "../components/Separtor";
+import * as firebase from 'firebase/app'
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword} from 'firebase/auth'
+import {getDatabase} from 'firebase/database'
+import { getFirestore, setDoc, doc,collection,onSnapshot } from 'firebase/firestore';
+import { firebaseConfig } from "../firebase-config";
 
-const chats = [
-    {
-        users:['gorkemguler1996@gmail.com', 'a@gmail.com'],
-        messages:[]
-    },
-    {
-        users:['gorkemguler1996@gmail.com', 'a@gmail.com'],
-        messages:[]
-    },{
-        users:['gorkemguler1996@gmail.com', 'a@gmail.com'],
-        messages:[]
-    },{
-        users:['gorkemguler1996@gmail.com', 'a@gmail.com'],
-        messages:[]
-    },
-    {
-        users:['gorkemguler1996@gmail.com', 'a@gmail.com'],
-        messages:[]
-    },{
-        users:['gorkemguler1996@gmail.com', 'a@gmail.com'],
-        messages:[]
-    },
 
-]
+const app = firebase.initializeApp(firebaseConfig)
+const auth = getAuth(app)
+const db = getDatabase(app)
+const fireStore = getFirestore(app)
 
+// const reference = db.ref(db,"age")
+
+// console.log(deneme)
 
 function Chats({navigation}) {
 
@@ -38,20 +27,26 @@ function Chats({navigation}) {
         }
     },[])
 
+    const [chats,setChats] = useState([])
+
+    useEffect( ()=>{
+          console.log(collection(fireStore,'chats'));
+    },[])
+
     return (
         <View >
-            {chats.map((chat,index)=>(
-                <>
+            {chats.map((chat)=>(
+                <View key={chat.id}>
                     <ContactRow
-                        key={index}
-                        name={"chat.users.find(x=>x !== firebase.auth().currentUser.email)"}
-                        subtitle={"React Native Course"}
+                        name={chat?.data()?.users.find((x)=>x !== auth?.currentUser?.email)}
+                        subtitle={"No message yet"}
                         onPress={()=>{
                             navigation.navigate("Chat")
                         }}
                     />
                     <Separtor/>
-                </>
+                    {/*<Button title={"eklemelik"} onPress={()=>createUserWithEmailAndPassword(auth,"f@gmail.com","123123123")}/>*/}
+                </View>
             ))}
 
         </View>

@@ -9,7 +9,8 @@ function ContactRow({ name, subtitle, onPress, style}) {
 
             <View style={styles.avatar}>
                 <Text style={styles.avatarLabel}>
-                    {name.split(' ').reduce((prev,current)=> `${prev[0]}${current[0]}`)}
+                    {/*{name.split(' ').reduce((prev,current)=> `${prev[0]}${current[0]}`)}*/}
+                    {name.split('@gmail.com')}
                 </Text>
             </View>
 

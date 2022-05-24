@@ -9,7 +9,7 @@ import {Ionicons} from "@expo/vector-icons";
 import {colors} from "./config/constants";
 import {StatusBar} from "react-native";
 import Chat from './screens/Chat'
-// import {initializeApp} from "firebase/app"
+
 
 
 
@@ -40,20 +40,6 @@ const TabsScreen = () => (
 const MainStack = createNativeStackNavigator();
 
 function App(props) {
-
-    // const firebaseConfig = {
-    //     apiKey: "AIzaSyBG0GiYc-uAcMWWKlUu8P-zQttIkZ87s8g",
-    //     authDomain: "chatty-4d4e3.firebaseapp.com",
-    //     projectId: "chatty-4d4e3",
-    //     storageBucket: "chatty-4d4e3.appspot.com",
-    //     messagingSenderId: "617043085567",
-    //     appId: "1:617043085567:web:a507f2159997c7c58364ca"
-    // };
-    //
-    // const app = initializeApp(firebaseConfig);
-
-
-
     return (
         <NavigationContainer mode={"modal"}>
             <MainStack.Navigator screenOptions={{headerShown:false}}>
